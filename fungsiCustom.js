@@ -22,36 +22,37 @@ let modifyFile3 = (val) => {
 const bacaData = (fnCallBack) => {
   let result = [];
 
+  // json 1
   fs.readFile(file1, {encoding: "utf8"}, (err, data) => {
-      if (err) {
-        return fnCallBack(err, null);
-      } else {
-        const resultData = JSON.parse(data);
-        result.push(resultData.message.split(" ")[1]);
-      }
+    if (err) {
+      return fnCallBack(err, null);
     }
-  );
+    const resultData = JSON.parse(data);
+    result.push(resultData.message.split(" ")[1]);
 
-  fs.readFile(file2, {encoding: "utf8"}, (err, data) => {
+    // json 2
+    fs.readFile(file2, {encoding: "utf8"}, (err, data) => {
       if (err) {
         return fnCallBack(err, null);
-      } else {
-        const resultData = JSON.parse(data);
-        result.push(resultData[0].message.split(" ")[1]);
       }
-    }
-  );
+      const resultData = JSON.parse(data);
+      result.push(resultData[0].message.split(" ")[1]);
 
-  fs.readFile(file3, {encoding: "utf8"}, (err, data) => {
-      if (err) {
-        return fnCallBack(err, null);
-      } else {
+      // json 3
+      fs.readFile(file3, {encoding: "utf8"}, (err, data) => {
+        if (err) {
+          return fnCallBack(err, null);
+        }
         const resultData = JSON.parse(data);
         result.push(resultData[0].data.message.split(" ")[1]);
         fnCallBack(null, result);
-      }
-    }
-  );
+
+      });
+    });
+
+  });
+
+
 };
 
 // ! JANGAN DIMODIFIKASI
